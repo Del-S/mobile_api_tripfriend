@@ -69,7 +69,7 @@ class TF_API {
         $method_array = array( 
             "create" => "create_schedule",
             "update" => "update_schedule",
-            "disable" => "disable_schedule"
+            "change_status" => "change_status_schedule",
         );
         return $method_array[$schedule_method];
     }
