@@ -24,14 +24,10 @@ class TF_API {
             
             if($response == false) {
                 status_header( 404 );
-                echo 'Function returned wrong response!';
+                echo json_encode(array("error" => "Function returned wrong output."));
             } else {
                 echo $response;
             }
-            exit();
-        } else {
-            status_header( 404 );
-            get_template_part( 404 ); 
             exit();
         }
     }
@@ -46,6 +42,7 @@ class TF_API {
         $method_array = array( 
             "all" => array( "controller" => "TF_Respond_Controller", "method" => "all_response" ),
             "friends" => array( "controller" => "TF_Respond_Controller", "method" => "friends_response" ),
+            "friends-available" => array( "controller" => "TF_Respond_Controller", "method" => "available_friends_response" ),
             "schedule" => array( "controller" => "TF_Schedule_Controller", "method" => $this->get_schedule_method() ) 
         );        
         $this->method = $method_array[$tf_api]["method"];
