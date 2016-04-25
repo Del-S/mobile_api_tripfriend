@@ -22,7 +22,7 @@ class TF_API_All_Response {
         
         $return = array();
         $return['locations'] = $this->get_locations();
-        $return['languages'] = $birchschedule->model->get_locations_services_map();
+        $return['languages'] = $this->get_languages();
         $return['time_spans'] = $birchschedule->model->get_time_spans();
         $return['preferences'] = $this->get_preferences();
         $return['start_time'] = $birchschedule->model->get_start_time();
@@ -39,6 +39,24 @@ class TF_API_All_Response {
             $locations[$id] = $location['_birs_location_name'];
         }
         return $locations;
+    }
+    
+    function get_languages() {
+        global $birchschedule;
+        
+        print_r($b_languages);
+        
+        $r_languages = array(); 
+        $b_languages = $birchschedule->model->get_locations_services_map();
+        foreach ($b_languages as $l_id => $languages) {
+            foreach($languages as $id => $language) {
+                if( !array_key_exists( $id, $r_languages ) ) {
+                    $r_languages[$id] = $language;
+                }
+            }
+        }
+        
+        return $r_languages;
     }
     
     function get_preferences() {
