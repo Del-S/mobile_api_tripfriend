@@ -23,7 +23,7 @@ class TF_API {
             $response = $this->controller->respond($this->method);
             
             if($response == false) {
-                status_header( 404 );
+                //status_header( 404 );
                 echo json_encode(array("error" => "Function returned wrong output."));
             } else {
                 echo $response;
