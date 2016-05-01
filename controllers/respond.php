@@ -37,8 +37,8 @@ class TF_Respond_Controller {
         } 
         $template_instance = new TF_API_Friends_Response();
         
-	$json = file_get_contents('php://input');
-	$obj = json_decode($json);
+        $json = file_get_contents('php://input');
+        $obj = json_decode($json);
 
         $location_id = $obj->{'location_id'};
         $service_id = $obj->{'service_id'};
@@ -47,9 +47,9 @@ class TF_Respond_Controller {
         $timespan = $obj->{'timespan'};
 
         if( (!empty($location_id)) && (!empty($service_id)) && (!empty($date)) && (!empty($time)) && (!empty($timespan))) {
-	    return $template_instance->show_friends_avaliable($location_id, $service_id, $date, $time, $timespan);
+	       return $template_instance->show_friends_avaliable($location_id, $service_id, $date, $time, $timespan);
         } else {
-	    return false;
+	       return false;
         }
     }
     
