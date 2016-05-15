@@ -70,6 +70,7 @@ class TF_API {
             "create" => "create_schedule",
             "update" => "update_schedule",
             "change_status" => "change_status_schedule",
+            "show_by_email" => "show_by_email_schedule"
         );
         return $method_array[$schedule_method];
     }

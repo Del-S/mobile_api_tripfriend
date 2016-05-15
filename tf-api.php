@@ -40,6 +40,7 @@ function tf_api_rewrites($wp_rules) {
     "tf-api\$" => 'index.php?tf-api=all',
     "tf-api/friends\$" => 'index.php?tf-api=friends',
     "tf-api/friends-available\$" => 'index.php?tf-api=friends-available',
+    "tf-api/schedule\$" => 'index.php?tf-api=schedule&sch-method=show_by_email',
     "tf-api/schedule/(.+)\$" => 'index.php?tf-api=schedule&sch-method=$matches[1]'
   );
   return array_merge($tf_api_rules, $wp_rules);
