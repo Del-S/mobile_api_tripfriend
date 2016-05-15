@@ -20,7 +20,7 @@ class TF_Schedule_Controller {
         $time_start = $obj->{'time_start'};
         $time_end = $obj->{'time_end'};
         //test purposes
-        //$email = "john@cena.cena";
+        //$email = "david@sucharda.cz";
         $time_start = time() - 1000 * 60 * 60;
         $time_end = time() + 1000 * 60 * 60;
         
@@ -41,6 +41,7 @@ class TF_Schedule_Controller {
                         'client_keys' => array( 'post_title', '_birs_client_group', '_birs_client_phone', '_birs_client_email' )
                     ) );
             
+            $return["schedules"] = array();
             $template = TF_API_DIR . "/template/friends-response.php";
             if (file_exists($template)) {
                 require_once $template;
@@ -72,13 +73,16 @@ class TF_Schedule_Controller {
                 $appointment_data["date"] = $date;
                 $hour = date('H', $appointment['_birs_appointment_timestamp']);
                 $minute = date('i', $appointment['_birs_appointment_timestamp']);
-                $appointment_data["time"] = $hour + ":" + $minute;
+                $appointment_data["time"] = $hour . ":" . $minute;
                     
+                if(empty($appointment['_birs_appointment_preference']) || ($appointment['_birs_appointment_preference'] == "")) { $appointment['_birs_appointment_preference'] = array(); }
                 $appointment_data["preferences"] = $appointment['_birs_appointment_preference'];
                 $time_minutes = ($hour * 60) + $minute;
-                $appointment_data["availableFriends"] = json_decode($template_instance->show_friends_avaliable($appointment_data["location_id"], $appointment_data["service_id"], $appointment_data["date"], $time_minutes, $appointment_data["timespan"]));
+                $available_friends = json_decode($template_instance->show_friends_avaliable($appointment_data["location_id"], $appointment_data["service_id"], $appointment_data["date"], $time_minutes, $appointment_data["timespan"]), true);
+                if(empty($available_friends) || ($available_friends == "")) { $available_friends = array(); }
+                $appointment_data = array_merge($appointment_data, $available_friends);
                 
-                $return[$k] = $appointment_data;
+                $return["schedules"][$k] = $appointment_data;
             }
             
             return json_encode($return);
