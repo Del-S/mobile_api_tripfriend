@@ -20,7 +20,7 @@ class TF_Schedule_Controller {
         $time_start = $obj->{'time_start'};
         $time_end = $obj->{'time_end'};
         //test purposes
-        //$email = "david@sucharda.cz";
+        $email = "david@sucharda.cz";
         $time_start = time() - 1000 * 60 * 60;
         $time_end = time() + 1000 * 60 * 60;
         

@@ -25,7 +25,7 @@ class TF_API_Friends_Response {
         foreach( $staff_options as $id => $staff ) {
             $friends[] = $id;
         }
-	if($friends == null) { $friends = ""; }
+	if($friends == null) { $friends = array(); }
         return json_encode(array('available_friends' => $friends));
     }
     
